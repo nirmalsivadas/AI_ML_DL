@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt # data visualization library
 from sklearn.linear_model import Perceptron # import the perceptron model
 from mlxtend.plotting import plot_decision_regions # import the function to plot decision regions
 
-df = pd.read_csv('Single Layer Perceptron Dataset.csv').dropna(how='all') # read the dataset and drop any rows that are all NaN
+df = pd.read_csv(r'C:\Users\Nirmal\OneDrive\Desktop\AI_ML_DL\DL\files\Single Layer Perceptron Dataset.csv').dropna(how='all') # read the dataset and drop any rows that are all NaN
 
 print(df.shape) # how many rows and columns are in the dataset
 df.head() # first 5 rows of the dataset
