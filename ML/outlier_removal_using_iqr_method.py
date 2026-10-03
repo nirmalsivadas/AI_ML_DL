@@ -1,10 +1,6 @@
-import warnings
-warnings.filterwarnings("ignore")
 
 import numpy as np
 import pandas as pd
-import matplotlib
-matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
 
@@ -12,17 +8,22 @@ df = pd.read_csv('files/placement (1).csv')
 
 print(df.head())
 
-sns.displot(df['cgpa'], kde=True, height=4, aspect=2)
-plt.title('cgpa distribution')
+plt.figure(figsize=(16,5))
+plt.subplot(1,2,1)
+sns.distplot(df['cgpa'])
+
+plt.subplot(1,2,2)
+sns.distplot(df['placement_exam_marks'])
+
 plt.show()
 
-sns.displot(df['placement_exam_marks'], kde=True, height=4, aspect=2)
+plot = sns.displot(df['placement_exam_marks'], kde=True, height=4, aspect=2)
 plt.title('placement exam marks distribution')
 plt.show()
 
 print(df['placement_exam_marks'].describe())
 
-sns.boxplot(x=df['placement_exam_marks'])
+sns.boxplot(df['placement_exam_marks'])
 plt.show()
 
 # Finding the IQR
@@ -48,13 +49,19 @@ print(new_df.shape)
 
 # Comparing
 
-fig, axes = plt.subplots(1, 2, figsize=(16, 6))
+plt.figure(figsize=(16,8))
+plt.subplot(2,2,1)
+sns.distplot(df['placement_exam_marks'])
 
-sns.histplot(df['placement_exam_marks'], kde=True, ax=axes[0])
-axes[0].set_title('Before IQR trimming')
+plt.subplot(2,2,2)
+sns.boxplot(df['placement_exam_marks'])
 
-sns.histplot(new_df['placement_exam_marks'], kde=True, ax=axes[1])
-axes[1].set_title('After IQR trimming')
+plt.subplot(2,2,3)
+sns.distplot(new_df['placement_exam_marks'])
+
+plt.subplot(2,2,4)
+sns.boxplot(new_df['placement_exam_marks'])
+
 plt.show()
 
 new_df_cap = df.copy()
@@ -73,12 +80,17 @@ print(new_df_cap.shape)
 
 # Comparing
 
-fig, axes = plt.subplots(1, 2, figsize=(16, 6))
+plt.figure(figsize=(16,8))
+plt.subplot(2,2,1)
+sns.distplot(df['placement_exam_marks'])
 
-sns.histplot(df['placement_exam_marks'], kde=True, ax=axes[0])
-axes[0].set_title('Before capping')
+plt.subplot(2,2,2)
+sns.boxplot(df['placement_exam_marks'])
 
-sns.histplot(new_df_cap['placement_exam_marks'], kde=True, ax=axes[1])
-axes[1].set_title('After capping')
+plt.subplot(2,2,3)
+sns.distplot(new_df_cap['placement_exam_marks'])
+
+plt.subplot(2,2,4)
+sns.boxplot(new_df_cap['placement_exam_marks'])
+
 plt.show()
-
