@@ -27,16 +27,16 @@ sns.boxplot(df['placement_exam_marks'])
 plt.show()
 
 # Finding the IQR
-percentile25 = df['placement_exam_marks'].quantile(0.25)
-percentile75 = df['placement_exam_marks'].quantile(0.75)
+percentile25 = df['placement_exam_marks'].quantile(0.25) # 25th percentile 
+percentile75 = df['placement_exam_marks'].quantile(0.75) # 75th percentile
 
 print(percentile75)
 
 iqr = percentile75 - percentile25
 print(iqr)
 
-upper_limit = percentile75 + 1.5 * iqr
-lower_limit = percentile25 - 1.5 * iqr
+upper_limit = percentile75 + 1.5 * iqr # any value greater than upper limit is outlier
+lower_limit = percentile25 - 1.5 * iqr # any value less than lower limit is outlier
 
 print("Upper limit", upper_limit)
 print("Lower limit", lower_limit)
@@ -44,7 +44,7 @@ print("Lower limit", lower_limit)
 print(df[df['placement_exam_marks'] > upper_limit])
 print(df[df['placement_exam_marks'] < lower_limit])
 
-new_df = df[df['placement_exam_marks'] < upper_limit]
+new_df = df[df['placement_exam_marks'] < upper_limit] # removing the outliers
 print(new_df.shape)
 
 # Comparing
@@ -74,7 +74,7 @@ new_df_cap['placement_exam_marks'] = np.where(
         lower_limit,
         new_df_cap['placement_exam_marks']
     )
-)
+) # capping the outliers
 
 print(new_df_cap.shape)
 
