@@ -1,13 +1,8 @@
-import warnings
-warnings.filterwarnings("ignore")
-
 import numpy as np
 import pandas as pd
 
 from sklearn.model_selection import train_test_split
 
-import matplotlib
-matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import seaborn as sns
 
@@ -28,12 +23,19 @@ X_train['Age_imputed'] = X_train['Age']
 X_test['Age_imputed'] = X_test['Age']
 
 missing_train = X_train['Age_imputed'].isnull()
-if missing_train.sum() > 0:
-    X_train.loc[missing_train, 'Age_imputed'] = X_train['Age'].dropna().sample(missing_train.sum()).values
+available_train_ages = X_train['Age'].dropna()
+for index, observation in X_train.loc[missing_train].iterrows():
+    sampled_value = available_train_ages.sample(
+        1, random_state=int(observation['Fare'])
+    ).iloc[0]
+    X_train.loc[index, 'Age_imputed'] = sampled_value
 
 missing_test = X_test['Age_imputed'].isnull()
-if missing_test.sum() > 0:
-    X_test.loc[missing_test, 'Age_imputed'] = X_train['Age'].dropna().sample(missing_test.sum()).values
+for index, observation in X_test.loc[missing_test].iterrows():
+    sampled_value = available_train_ages.sample(
+        1, random_state=int(observation['Fare'])
+    ).iloc[0]
+    X_test.loc[index, 'Age_imputed'] = sampled_value
 
 print(X_train)
 print('Age missing in training set:', X_train['Age'].isnull().sum())
@@ -50,8 +52,7 @@ print(X_train[['Fare', 'Age', 'Age_imputed']].cov())
 X_train[['Age', 'Age_imputed']].boxplot()
 plt.show()
 
-house_path = 'files/train (1).csv'
-data = pd.read_csv(house_path, usecols=['GarageQual', 'FireplaceQu', 'SalePrice'])
+data = pd.read_csv('files/house-train.csv',usecols=['GarageQual','FireplaceQu', 'SalePrice'])
 
 print(data.head())
 print(data.isnull().mean() * 100)
@@ -72,7 +73,7 @@ print(X_train.sample(5))
 
 missing_garage_train = X_train['GarageQual_imputed'].isnull()
 if missing_garage_train.sum() > 0:
-    X_train.loc[missing_garage_train, 'GarageQual_imputed'] = X_train['GarageQual'].dropna().sample(missing_garage_train.sum()).values
+    X_train.loc[missing_garage_train, 'GarageQual_imputed'] = X_train['GarageQual'].dropna().sample(missing_garage_train.sum()).values # fill with random values from the training set without missing values in the variable
 
 missing_garage_test = X_test['GarageQual_imputed'].isnull()
 if missing_garage_test.sum() > 0:

@@ -30,7 +30,7 @@ y_pred = clf.predict(X_test_trf)
 
 print(accuracy_score(y_test,y_pred))
 
-mi = MissingIndicator()
+mi = MissingIndicator() # missing indicator, what this does is it will return the features that have missing values in the dataset and the missing values will be 0 and the non missing values will be 1, a new column will be added to the dataset
 
 mi.fit(X_train)
 
@@ -64,7 +64,7 @@ y_pred = clf.predict(X_test_trf2)
 
 print(accuracy_score(y_test,y_pred))
 
-si = SimpleImputer(add_indicator=True)
+si = SimpleImputer(add_indicator=True) # missing indicator class is added
 
 X_train = si.fit_transform(X_train)
 

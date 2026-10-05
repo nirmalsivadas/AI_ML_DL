@@ -30,26 +30,26 @@ print(X_train.head())
 numerical_features = ['Age', 'Fare']
 numerical_transformer = Pipeline(steps=[
     ('imputer', SimpleImputer(strategy='median')),
-    ('scaler', StandardScaler())
+    ('scaler', StandardScaler()) # what we are doing in numerical_transformer is we are scaling the numerical features to have a mean of 0 and a standard deviation of 1 
 ])
 
 categorical_features = ['Embarked', 'Sex']
 categorical_transformer = Pipeline(steps=[
     ('imputer', SimpleImputer(strategy='most_frequent')),
-    ('ohe',OneHotEncoder(handle_unknown='ignore'))
+    ('ohe',OneHotEncoder(handle_unknown='ignore')) # what we are doing in categorical_transformer is we are one hot encoding the categorical features
 ])
 
 preprocessor = ColumnTransformer(
     transformers=[
         ('num', numerical_transformer, numerical_features),
-        ('cat', categorical_transformer, categorical_features)
+        ('cat', categorical_transformer, categorical_features) 
     ]
-)
+) # preprocessor is a pipeline of transformers that are applied to the numerical and categorical features
 
 clf = Pipeline(steps=[
     ('preprocessor', preprocessor),
     ('classifier', LogisticRegression())
-])
+]) # clf is a pipeline of preprocessor and classifier
 
 set_config(display='diagram')
 print(clf)
@@ -58,9 +58,9 @@ param_grid = {
     'preprocessor__num__imputer__strategy': ['mean', 'median'],
     'preprocessor__cat__imputer__strategy': ['most_frequent', 'constant'],
     'classifier__C': [0.1, 1.0, 10, 100]
-}
+} # param_grid is a dictionary of hyperparameters to be tuned and their possible values
 
-grid_search = GridSearchCV(clf, param_grid, cv=10)
+grid_search = GridSearchCV(clf, param_grid, cv=10) # grid search is used to find the best hyperparameters by cross validation, we used it to fill the missing values in the numerical and categorical features
 
 grid_search.fit(X_train, y_train)
 
