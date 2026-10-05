@@ -3,7 +3,7 @@ import numpy as np
 
 from sklearn.linear_model import LinearRegression
 
-df = np.round(pd.read_csv('files/50_Startups.csv')[['R&D Spend','Administration','Marketing Spend','Profit']]/10000)
+df = np.round(pd.read_csv('files/50_Startups.csv')[['R&D Spend','Administration','Marketing Spend','Profit']]/10000) # what this does is divide by 10000 and round to 2 decimal places for each value
 np.random.seed(9)
 df = df.sample(5)
 
@@ -22,9 +22,10 @@ print(df.head())
 
 df0 = pd.DataFrame()
 
+# first step in iterative imputation where we impute all missing values with mean
 df0['R&D Spend'] = df['R&D Spend'].fillna(df['R&D Spend'].mean())
 df0['Administration'] = df['Administration'].fillna(df['Administration'].mean())
-df0['Marketing Spend'] = df['Marketing Spend'].fillna(df['Marketing Spend'].mean())
+df0['Marketing Spend'] = df['Marketing Spend'].fillna(df['Marketing Spend'].mean()) 
 
 # 0th Iteration
 print(df0)
