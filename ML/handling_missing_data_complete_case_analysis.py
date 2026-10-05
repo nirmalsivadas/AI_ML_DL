@@ -10,11 +10,11 @@ df = pd.read_csv(csv_path)
 
 print(df.head())
 
-print(df.isnull().mean()*100)
+print(df.isnull().mean()*100) # percentage of missing values
 
 print(df.shape)
 
-cols = [var for var in df.columns if df[var].isnull().mean() < 0.05 and df[var].isnull().mean() > 0]
+cols = [var for var in df.columns if df[var].isnull().mean() < 0.05 and df[var].isnull().mean() > 0] # less than 5% of missing values and more than 0 missing values
 
 print(cols)
 
@@ -22,14 +22,14 @@ print(df[cols].sample(5))
 
 print(df['education_level'].value_counts())
 
-print(len(df[cols].dropna()) / len(df))
+print(len(df[cols].dropna()) / len(df)) # percentage of complete cases after cca
 
 new_df = df[cols].dropna()
 
 print(df.shape)
 print(new_df.shape)
 
-new_df.hist(bins=50, density=True, figsize=(12, 12))
+new_df.hist(bins=50, density=True, figsize=(12, 12)) # histogram of complete cases after cca
 plt.show()
 
 fig = plt.figure()
@@ -107,7 +107,7 @@ temp = pd.concat([
             # percentage of observations per category, cca data
             new_df['enrolled_university'].value_counts() / len(new_df)
         ],
-        axis=1)
+        axis=1) # concatenate the 2 dataframes vertically to create a single dataframe with 2 columns (one for original data and one for cca data) and 1 row for each category in the 'enrolled_university' column of the original dataframe and the 'enrolled_university' column of the cca dataframe respectively 
 
 # add column names
 temp.columns = ['original', 'cca']
@@ -120,7 +120,7 @@ temp = pd.concat([
             # percentage of observations per category, cca data
             new_df['education_level'].value_counts() / len(new_df)
         ],
-        axis=1)
+        axis=1) 
 
 # add column names
 temp.columns = ['original', 'cca']
