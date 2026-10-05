@@ -15,7 +15,7 @@ plt.xlabel('GarageQual')
 plt.ylabel('Number of houses')
 plt.show()
 
-df['GarageQual'].fillna('Missing', inplace=True)
+df['GarageQual'].fillna('Missing', inplace=True) # create a new category for missing values and replace them with 'Missing'
 
 df['GarageQual'].value_counts().sort_values(ascending=False).plot.bar()
 plt.xlabel('GarageQual')

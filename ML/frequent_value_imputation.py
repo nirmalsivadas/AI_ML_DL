@@ -32,7 +32,7 @@ plt.title('GarageQual')
 plt.show()
 
 temp = df[df['GarageQual']=='TA']['SalePrice']
-df['GarageQual'] = df['GarageQual'].fillna('TA')
+df['GarageQual'] = df['GarageQual'].fillna('TA') # fill the missing values with the most frequent value of the variable
 df['GarageQual'].value_counts().plot(kind='bar')
 plt.show()
 
@@ -73,7 +73,7 @@ plt.title('FireplaceQu')
 plt.show()
 
 temp = df[df['FireplaceQu']=='Gd']['SalePrice']
-df['FireplaceQu'] = df['FireplaceQu'].fillna('Gd')
+df['FireplaceQu'] = df['FireplaceQu'].fillna('Gd') # fill the missing values with the most frequent value of the variable
 df['FireplaceQu'].value_counts().plot(kind='bar')
 plt.show()
 
