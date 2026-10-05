@@ -40,7 +40,7 @@ print(new_df)
 
 # Calculating the Zscore
 
-df['cgpa_zscore'] = (df['cgpa'] - df['cgpa'].mean())/df['cgpa'].std()
+df['cgpa_zscore'] = (df['cgpa'] - df['cgpa'].mean())/df['cgpa'].std() # zscore = (value - mean)/std
 
 print(df.head())
 
@@ -62,7 +62,7 @@ print(lower_limit)
 
 df['cgpa'] = np.where(
     df['cgpa']>upper_limit,
-    upper_limit,
+    upper_limit, # condition, true value, false value
     np.where(
         df['cgpa']<lower_limit,
         lower_limit,
