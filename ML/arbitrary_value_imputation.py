@@ -21,7 +21,7 @@ y = df['Survived']
 
 X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.2,random_state=2)
 
-X_train['Age_99'] = X_train['Age'].fillna(99)
+X_train['Age_99'] = X_train['Age'].fillna(99) # any arbitrary value can be used to fill the missing values
 X_train['Age_minus1'] = X_train['Age'].fillna(-1)
 
 X_train['Fare_999'] = X_train['Fare'].fillna(999)
@@ -74,7 +74,7 @@ print(X_train.corr())
 
 X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.2,random_state=2)
 
-imputer1 = SimpleImputer(strategy='constant',fill_value=99)
+imputer1 = SimpleImputer(strategy='constant',fill_value=99) # any arbitrary value can be used, constant is used to fill the missing values with a specific value
 imputer2 = SimpleImputer(strategy='constant',fill_value=999)
 
 trf = ColumnTransformer([

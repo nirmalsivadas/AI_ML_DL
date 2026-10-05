@@ -28,17 +28,17 @@ print(X_test.shape)
 
 print(X_train.isnull().mean())
 
-mean_age = X_train['Age'].mean()
-median_age = X_train['Age'].median()
+mean_age = X_train['Age'].mean() # calculating mean for mean imputation
+median_age = X_train['Age'].median() # calculating median for median imputation
 
-mean_fare = X_train['Fare'].mean()
-median_fare = X_train['Fare'].median()
+mean_fare = X_train['Fare'].mean() # calculating mean for mean imputation
+median_fare = X_train['Fare'].median() # calculating median for median imputation
 
-X_train['Age_median'] = X_train['Age'].fillna(median_age)
-X_train['Age_mean'] = X_train['Age'].fillna(mean_age)
+X_train['Age_median'] = X_train['Age'].fillna(median_age) # imputing missing values with median 
+X_train['Age_mean'] = X_train['Age'].fillna(mean_age) # imputing missing values with mean
 
-X_train['Fare_median'] = X_train['Fare'].fillna(median_fare)
-X_train['Fare_mean'] = X_train['Fare'].fillna(mean_fare)
+X_train['Fare_median'] = X_train['Fare'].fillna(median_fare) # imputing missing values with median
+X_train['Fare_mean'] = X_train['Fare'].fillna(mean_fare) # imputing missing values with mean
 
 print(X_train.sample(5))
 
