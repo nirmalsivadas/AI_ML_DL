@@ -21,7 +21,7 @@ X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.2,random_state=
 
 print(X_train.head())
 
-knn = KNNImputer(n_neighbors=3,weights='distance')
+knn = KNNImputer(n_neighbors=3,weights='distance') # what this does is that it takes the average of the 3 nearest neighbors and imputes the missing values with that
 
 X_train_trf = knn.fit_transform(X_train)
 X_test_trf = knn.transform(X_test)
