@@ -25,7 +25,7 @@ print(X.head())
 
 print(np.mean(cross_val_score(LogisticRegression(), X, y, scoring='accuracy', cv=20)))
 
-X['Family_size'] = X['SibSp'] + X['Parch'] + 1
+X['Family_size'] = X['SibSp'] + X['Parch'] + 1 # feature construction
 
 print(X.head())
 
@@ -46,7 +46,7 @@ X['Family_type'] = X['Family_size'].apply(myfunc)
 
 print(X.head())
 
-X.drop(columns=['SibSp', 'Parch', 'Family_size'], inplace=True)
+X.drop(columns=['SibSp', 'Parch', 'Family_size'], inplace=True) 
 
 print(X.head())
 
@@ -58,9 +58,9 @@ print(df.head())
 
 print(df['Name'])
 
-df['Title'] = df['Name'].str.split(', ', expand=True)[1].str.split('.', expand=True)[0]
+df['Title'] = df['Name'].str.split(', ', expand=True)[1].str.split('.', expand=True)[0] # feature splitting
 
-print(df['Name'].str.split(', ', expand=True)[1].str.split('.', expand=True)[0])
+print(df['Name'].str.split(', ', expand=True)[1].str.split('.', expand=True)[0]) # feature splitting
 
 print(df[['Title', 'Name']])
 
