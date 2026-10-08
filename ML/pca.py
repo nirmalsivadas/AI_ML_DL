@@ -13,24 +13,24 @@ from matplotlib.patches import FancyArrowPatch
 
 
 
-np.random.seed(23) 
+np.random.seed(23) # what this does is set the seed for the random number generator
 
-mu_vec1 = np.array([0,0,0])
-cov_mat1 = np.array([[1,0,0],[0,1,0],[0,0,1]])
-class1_sample = np.random.multivariate_normal(mu_vec1, cov_mat1, 20)
+mu_vec1 = np.array([0,0,0]) # what this does is set the mean for the random number generator
+cov_mat1 = np.array([[1,0,0],[0,1,0],[0,0,1]]) # what this does is set the covariance matrix for the random number generator
+class1_sample = np.random.multivariate_normal(mu_vec1, cov_mat1, 20) # what this does is generate a random sample from a multivariate normal distribution
 
-df = pd.DataFrame(class1_sample,columns=['feature1','feature2','feature3'])
+df = pd.DataFrame(class1_sample,columns=['feature1','feature2','feature3']) # what this does is create a dataframe from the random sample
 df['target'] = 1
 
 mu_vec2 = np.array([1,1,1])
 cov_mat2 = np.array([[1,0,0],[0,1,0],[0,0,1]])
-class2_sample = np.random.multivariate_normal(mu_vec2, cov_mat2, 20)
+class2_sample = np.random.multivariate_normal(mu_vec2, cov_mat2, 20) # what this does is generate a random sample from a multivariate normal distribution
 
-df1 = pd.DataFrame(class2_sample,columns=['feature1','feature2','feature3'])
+df1 = pd.DataFrame(class2_sample,columns=['feature1','feature2','feature3']) # what this does is create a dataframe from the random sample
 
-df1['target'] = 0
+df1['target'] = 0 # what this does is add a new column to the dataframe
 
-df = pd.concat([df, df1], ignore_index=True)
+df = pd.concat([df, df1], ignore_index=True) # we concate the 2 dataframes because we want to combine the 2 dataframes into a single dataframe and ignore the index of the 2 dataframes
 
 df = df.sample(40, random_state=42)
 
@@ -43,27 +43,27 @@ fig = px.scatter_3d(df, x=df['feature1'], y=df['feature2'], z=df['feature3'],
 fig.update_traces(marker=dict(size=12,
                               line=dict(width=2,
                                         color='DarkSlateGrey')),
-                  selector=dict(mode='markers'))
+                  selector=dict(mode='markers')) # px scatter_3d is a 3d scatter plot
 
 fig.show()
 
 # Step 1 - Apply standard scaling
-scaler = StandardScaler()
+scaler = StandardScaler() # what this does is standardize the data by subtracting the mean and dividing by the standard deviation
 
 df.iloc[:,0:3] = scaler.fit_transform(df.iloc[:,0:3])
 
 # Step 2 - Find Covariance Matrix
-covariance_matrix = np.cov([df.iloc[:,0],df.iloc[:,1],df.iloc[:,2]])
+covariance_matrix = np.cov([df.iloc[:,0],df.iloc[:,1],df.iloc[:,2]]) # find the covariance matrix of the 3 features
 print('Covariance Matrix:\n', covariance_matrix)
 
 
 # Step 3 - Finding EV and EVs
-eigen_values, eigen_vectors = np.linalg.eig(covariance_matrix)
+eigen_values, eigen_vectors = np.linalg.eig(covariance_matrix) # what this does is find the eigen values and eigen vectors
 
 print('Eigen Values:\n', eigen_values)
 
 print('Eigen Vectors:\n', eigen_vectors)
-class Arrow3D(FancyArrowPatch):
+class Arrow3D(FancyArrowPatch): # what this does is create a 3d arrow from the eigen vectors and eigen values of the covariance matrix and plot it on a 3d scatter plot
     def __init__(self, xs, ys, zs, *args, **kwargs):
         FancyArrowPatch.__init__(self, (0,0), (0,0), *args, **kwargs)
         self._verts3d = xs, ys, zs
@@ -90,13 +90,13 @@ plt.title('Eigenvectors')
 
 plt.show()
 
-pc = eigen_vectors[:, :2]
+pc = eigen_vectors[:, :2] # what this does is select the first 2 eigen vectors, PC1 and PC2
 print(pc)
 
-transformed_df = np.dot(df.iloc[:, 0:3].to_numpy(), pc.real)
+transformed_df = np.dot(df.iloc[:, 0:3].to_numpy(), pc.T) # what this does is transform the data into PC1 and PC2
 # 40,3 - 3,2
-new_df = pd.DataFrame(transformed_df, columns=['PC1', 'PC2'])
-new_df['target'] = df['target'].values
+new_df = pd.DataFrame(transformed_df, columns=['PC1', 'PC2']) # what this does is create a dataframe from the transformed data
+new_df['target'] = df['target'].values # what this does is add a new column to the dataframe
 print(new_df.head())
 
 new_df['target'] = new_df['target'].astype('str')
@@ -109,6 +109,6 @@ fig = px.scatter(x=new_df['PC1'],
 fig.update_traces(marker=dict(size=12,
                               line=dict(width=2,
                                         color='DarkSlateGrey')),
-                  selector=dict(mode='markers'))
+                  selector=dict(mode='markers')) # 3d to 2d scatter plot
 fig.write_html('pca_plot.html')
 print('Saved plot to pca_plot.html')
