@@ -25,7 +25,7 @@ print(X_test)
 
 print(y_test)
 
-print(lr.predict(X_test.iloc[0].values.reshape(1,1)))
+print(lr.predict(X_test.iloc[0].values.reshape(1,1))) # lr.predict is a function that returns the predicted values of y for the given values of x
 
 plt.scatter(df['cgpa'],df['package'])
 plt.plot(X_train,lr.predict(X_train),color='red')
