@@ -36,16 +36,16 @@ plt.show()
 y_pred = lr.predict(X_test)
 print(y_test.values)
 
-print("MAE",mean_absolute_error(y_test,y_pred))
-print("MSE",mean_squared_error(y_test,y_pred))
-print("RMSE",np.sqrt(mean_squared_error(y_test,y_pred)))
-print("MSE",r2_score(y_test,y_pred))
-r2 = r2_score(y_test,y_pred)
+print("MAE",mean_absolute_error(y_test,y_pred)) # Mean absolute error
+print("MSE",mean_squared_error(y_test,y_pred)) # Mean squared error
+print("RMSE",np.sqrt(mean_squared_error(y_test,y_pred))) # Root mean squared error
+print("MSE",r2_score(y_test,y_pred)) # R2 score
+r2 = r2_score(y_test,y_pred) # R2 score
 
 # Adjusted R2 score
 print(X_test.shape)
 
-print(1 - ((1-r2)*(40-1)/(40-1-1)))
+print(1 - ((1-r2)*(40-1)/(40-1-1))) # adjusted R2 score
 
 new_df1 = df.copy()
 new_df1['random_feature'] = np.random.random(200)
