@@ -4,7 +4,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score
 
-X,y = load_diabetes(return_X_y=True)
+X,y = load_diabetes(return_X_y=True) # X -> features, y -> labels
 print(X)
 
 print(X.shape)
@@ -20,7 +20,7 @@ reg = LinearRegression()
 reg.fit(X_train,y_train)
 y_pred = reg.predict(X_test)
 
-print(r2_score(y_test,y_pred))
+print(r2_score(y_test,y_pred)) # R2 score
 
 print(reg.coef_)
 print(reg.intercept_)
@@ -50,6 +50,6 @@ print(X_train.shape)
 print(np.insert(X_train,0,1,axis=1).shape)
 
 y_pred = lr.predict(X_test)
-print(r2_score(y_test,y_pred))
+print(r2_score(y_test,y_pred)) # custom R2 score
 print(lr.coef_)
 print(lr.intercept_)
