@@ -24,15 +24,15 @@ y_pred = lr.predict(X_test)
 
 print(r2_score(y_test,y_pred))
 
-class GDRegressor:
+class GDRegressor: # GD = Gradient Descent
     
-    def __init__(self,learning_rate,epochs):
+    def __init__(self,learning_rate,epochs): # learning rate and epochs (constructor)
         self.m = 100
         self.b = -120
         self.lr = learning_rate
         self.epochs = epochs
         
-    def fit(self,X,y):
+    def fit(self,X,y): # fit function b and m values
         # calcualte the b using GD
         for i in range(self.epochs):
             loss_slope_b = -2 * np.sum(y - self.m*X.ravel() - self.b)
@@ -42,7 +42,7 @@ class GDRegressor:
             self.m = self.m - (self.lr * loss_slope_m)
         print(self.m,self.b)
         
-    def predict(self,X):
+    def predict(self,X): # predict function (m and b values)
         return self.m * X + self.b
 
 gd = GDRegressor(0.001,50)

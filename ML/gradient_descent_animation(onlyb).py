@@ -20,7 +20,7 @@ X, y = make_regression(
     n_targets=1,
     noise=20,
     random_state=13,
-)
+) # sample data
 
 reg = LinearRegression()
 reg.fit(X, y)

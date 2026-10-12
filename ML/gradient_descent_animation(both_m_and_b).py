@@ -17,21 +17,21 @@ X, y = make_regression(
     n_targets=1,
     noise=20,
     random_state=13,
-)
+) # sample data
 
 fig, ax = plt.subplots(figsize=(9, 5))
 ax.scatter(X, y)
 x_i = np.arange(-3, 3, 0.1)
 line, = ax.plot(x_i, x_i * 50 - 4, "r-", linewidth=2)
 fig.savefig(OUTPUT_DIR / "initial_regression_fit.png", bbox_inches="tight")
-plt.close(fig)
+plt.close(fig) # close figure
 
 b = -520
 m = 600
 lr = 0.001
-all_b = []
-all_m = []
-all_cost = []
+all_b = [] # intercept
+all_m = [] # slope
+all_cost = [] # cost
 
 epochs = 30
 
@@ -44,11 +44,11 @@ for i in range(epochs):
         slope_m = slope_m - 2 * (y[j] - (m * X[j]) - b) * X[j]
         cost = cost + (y[j] - m * X[j] - b) ** 2
 
-    b = b - (lr * slope_b)
-    m = m - (lr * slope_m)
-    all_b.append(b)
-    all_m.append(m)
-    all_cost.append(cost)
+    b = b - (lr * slope_b) # update
+    m = m - (lr * slope_m) # update
+    all_b.append(b) # store
+    all_m.append(m) # store
+    all_cost.append(cost) # store
 
 
 def save_animation(output_path, y_values, y_limits, x_label, title):

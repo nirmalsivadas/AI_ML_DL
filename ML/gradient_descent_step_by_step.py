@@ -10,8 +10,8 @@ plt.show()
 
 reg = LinearRegression()
 reg.fit(X,y)
-print(reg.coef_)
-print(reg.intercept_)
+print(reg.coef_) # slope
+print(reg.intercept_) # intercept
 
 
 plt.scatter(X,y)
@@ -22,7 +22,7 @@ plt.show()
 
 # Lets apply Gradient Descent assuming slope is constant m = 78.35
 # and let's assume the starting value for intercept b = 0
-y_pred = ((78.35 * X) + 100).reshape(4)
+y_pred = ((78.35 * X) + 100).reshape(4) # y_pred is the predicted value
 
 plt.scatter(X,y)
 plt.plot(X,reg.predict(X),color='red',label='OLS')
@@ -34,7 +34,7 @@ plt.show()
 m = 78.35
 b = 100
 
-loss_slope = -2 * np.sum(y - m*X.ravel() - b)
+loss_slope = -2 * np.sum(y - m*X.ravel() - b) # loss slope
 print(loss_slope)
 
 # Lets take learning rate = 0.1
@@ -44,11 +44,11 @@ step_size = loss_slope*lr
 print(step_size)
 
 # Calculating the new intercept
-b = b - step_size
+b = b - step_size # bnew = bold - step_size
 print(b)
 
 
-y_pred1 = ((78.35 * X) + b).reshape(4)
+y_pred1 = ((78.35 * X) + b).reshape(4) # y_pred is the new predicted value
 
 plt.scatter(X,y)
 plt.plot(X,reg.predict(X),color='red',label='OLS')
@@ -109,7 +109,7 @@ lr = 0.01
 epochs = 100
 
 for i in range(epochs):
-  loss_slope = -2 * np.sum(y - m*X.ravel() - b)
+  loss_slope = -2 * np.sum(y - m*X.ravel() - b) # ravel is used to flatten the array
   b = b - (lr * loss_slope)
 
   y_pred = m * X + b
