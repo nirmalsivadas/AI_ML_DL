@@ -34,22 +34,22 @@ class MBGDRegressor:
         
     def fit(self,X_train,y_train):
         # init your coefs
-        self.intercept_ = 0
-        self.coef_ = np.ones(X_train.shape[1])
+        self.intercept_ = 0 # b0
+        self.coef_ = np.ones(X_train.shape[1]) # b1,b2,b3 etc
         
         for i in range(self.epochs):
             
-            for j in range(int(X_train.shape[0]/self.batch_size)):
+            for j in range(int(X_train.shape[0]/self.batch_size)): # for each data point in the batch
                 
-                idx = random.sample(range(X_train.shape[0]),self.batch_size)
+                idx = random.sample(range(X_train.shape[0]),self.batch_size) # random sample
                 
-                y_hat = np.dot(X_train[idx],self.coef_) + self.intercept_
+                y_hat = np.dot(X_train[idx],self.coef_) + self.intercept_ # y = b0 + b1*x1 + b2*x2
                 #print("Shape of y_hat",y_hat.shape)
-                intercept_der = -2 * np.mean(y_train[idx] - y_hat)
-                self.intercept_ = self.intercept_ - (self.lr * intercept_der)
+                intercept_der = -2 * np.mean(y_train[idx] - y_hat) # b0_der = -2 * mean(y - y_hat)
+                self.intercept_ = self.intercept_ - (self.lr * intercept_der) # b0 = b0 - lr * b0_der
 
-                coef_der = -2 * np.dot((y_train[idx] - y_hat),X_train[idx])
-                self.coef_ = self.coef_ - (self.lr * coef_der)
+                coef_der = -2 * np.dot((y_train[idx] - y_hat),X_train[idx]) # b1_der = -2 * sum(y - y_hat) * x1
+                self.coef_ = self.coef_ - (self.lr * coef_der) # b1 = b1 - lr * b1_der
         
         print(self.intercept_,self.coef_)
     

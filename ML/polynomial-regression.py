@@ -11,8 +11,8 @@ from sklearn.metrics import r2_score
 
 from sklearn.pipeline import Pipeline
 
-X = 6 * np.random.rand(200, 1) - 3
-y = 0.8 * X**2 + 0.9 * X + 2 + np.random.randn(200, 1)
+X = 6 * np.random.rand(200, 1) - 3 # dataset of 200 points
+y = 0.8 * X**2 + 0.9 * X + 2 + np.random.randn(200, 1) # 0.8x^2 + 0.9x + 2
 
 # y = 0.8x^2 + 0.9x + 2
 
@@ -35,19 +35,19 @@ plt.plot(X_train,lr.predict(X_train),color='r')
 plt.plot(X, y, "b.")
 plt.xlabel("X")
 plt.ylabel("y")
-plt.show()
+plt.show() # line in non linear data
 
 # Applying Polynomial Linear Regression
 # degree 2
-poly = PolynomialFeatures(degree=2,include_bias=True)
+poly = PolynomialFeatures(degree=2,include_bias=True) # what this does is to include the bias term, degree is basically the number of features. for example if degree is 2 then the features are x^0, x^1, x^2
 
-X_train_trans = poly.fit_transform(X_train)
+X_train_trans = poly.fit_transform(X_train) 
 X_test_trans = poly.transform(X_test)
 
 print(X_train[0])
 print(X_train_trans[0])
 
-# include_bias parameter
+# include_bias parameter is set to True, which means that the bias term will be included in the output.
 lr = LinearRegression()
 lr.fit(X_train_trans,y_train)
 
@@ -68,7 +68,7 @@ plt.plot(X_test, y_test, "g.",label='Testing points')
 plt.xlabel("X")
 plt.ylabel("y")
 plt.legend()
-plt.show()
+plt.show() # graph curve is closer to non linear
 
 def polynomial_regression(degree):
     X_new=np.linspace(-3, 3, 100).reshape(100, 1)
@@ -121,7 +121,7 @@ plt.ylabel("y")
 plt.legend()
 plt.show()
 
-# 3D polynomial regression
+# 3D polynomial regression, multple features
 x = 7 * np.random.rand(100, 1) - 2.8
 y = 7 * np.random.rand(100, 1) - 2.8
 
@@ -133,7 +133,7 @@ fig = go.Figure(data=[go.Scatter3d(x=x.ravel(), y=y.ravel(), z=z.ravel(), mode="
 fig.show()
 
 lr = LinearRegression()
-lr.fit(np.array([x,y]).reshape(100,2),z)
+lr.fit(np.array([x,y]).reshape(100,2),z) # this is the input and output
 
 x_input = np.linspace(x.min(), x.max(), 10)
 y_input = np.linspace(y.min(), y.max(), 10)
@@ -149,11 +149,11 @@ fig.add_trace(go.Surface(x = x_input, y = y_input, z =z_final ))
 
 fig.show()
 
-X_multi = np.array([x,y]).reshape(100,2)
+X_multi = np.array([x,y]).reshape(100,2) # this is the input and output
 print(X_multi.shape)
 
 poly = PolynomialFeatures(degree=30)
-X_multi_trans = poly.fit_transform(X_multi)
+X_multi_trans = poly.fit_transform(X_multi) # what we are doing here is creating the polynomial features for x and y and then stacking them together
 
 print("Input", X_multi.shape[1])
 print("Output", poly.n_output_features_)
@@ -162,7 +162,7 @@ print("Powers\n",poly.powers_)
 print(X_multi_trans.shape)
 
 lr = LinearRegression()
-lr.fit(X_multi_trans,z)
+lr.fit(X_multi_trans,z) # fit the model using the polynomial features and the output
 
 X_test_multi = poly.transform(final)
 z_final = lr.predict(poly.transform(final)).reshape(10,10)
