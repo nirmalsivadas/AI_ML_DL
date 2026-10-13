@@ -13,7 +13,7 @@ y_pred = reg.predict(X_test)
 print(r2_score(y_test,y_pred))
 
 # Ridge 
-reg = Ridge(alpha=0.1)
+reg = Ridge(alpha=0.1) # alpha = lambda
 reg.fit(X_train,y_train)
 y_pred = reg.predict(X_test)
 print(r2_score(y_test,y_pred))
@@ -25,7 +25,7 @@ y_pred = reg.predict(X_test)
 print(r2_score(y_test,y_pred))
 
 # ElasticNet
-reg = ElasticNet(alpha=0.005,l1_ratio=0.9)
+reg = ElasticNet(alpha=0.005,l1_ratio=0.9) # elasticnet where l1_ratio is between 0 and 1, 90% l1 and 10% l2
 reg.fit(X_train,y_train)
 y_pred = reg.predict(X_test)
 print(r2_score(y_test,y_pred))

@@ -7,10 +7,10 @@ from sklearn.datasets import load_diabetes
 data=load_diabetes()
 
 print(data.DESCR)
-X=data.data
-y=data.target
+X=data.data # features
+y=data.target # labels
 
-X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.2,random_state=45)
+X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.2,random_state=45) # 80% for training and 20% for testing
 
 from sklearn.linear_model import LinearRegression
 L=LinearRegression()
@@ -19,24 +19,24 @@ L.fit(X_train,y_train)
 print(L.coef_)
 print(L.intercept_)
 
-y_pred=L.predict(X_test)
+y_pred=L.predict(X_test) # predictions
 from sklearn.metrics import r2_score,mean_squared_error
 
-print("R2 score",r2_score(y_test,y_pred))
-print("RMSE",np.sqrt(mean_squared_error(y_test,y_pred)))
+print("R2 score",r2_score(y_test,y_pred)) # R2 score
+print("RMSE",np.sqrt(mean_squared_error(y_test,y_pred))) # RMSE
 
 from sklearn.linear_model import Ridge
-R=Ridge(alpha=100000)
+R=Ridge(alpha=100000) # alpha is a hyperparameter that controls the strength of the regularization (lambda in linear regression)
 R.fit(X_train,y_train)
 print(R.coef_)
 print(R.intercept_)
 y_pred1=R.predict(X_test)
 
-print("R2 score",r2_score(y_test,y_pred1))
+print("R2 score",r2_score(y_test,y_pred1)) # R2 score
 print("RMSE",np.sqrt(mean_squared_error(y_test,y_pred1)))
-m = 100
-x1 = 5 * np.random.rand(m, 1) - 2
-x2 = 0.7 * x1 ** 2 - 2 * x1 + 3 + np.random.randn(m, 1)
+m = 100 
+x1 = 5 * np.random.rand(m, 1) - 2 # dataset
+x2 = 0.7 * x1 ** 2 - 2 * x1 + 3 + np.random.randn(m, 1) # labels x1^2 - 2x1 + 3
 
 plt.scatter(x1, x2)
 plt.show()
@@ -49,7 +49,7 @@ def get_preds_ridge(x1, x2, alpha):
         ('poly_feats', PolynomialFeatures(degree=16)),
         ('ridge', Ridge(alpha=alpha))
     ])
-    model.fit(x1, x2)
+    model.fit(x1, x2) 
     return model.predict(x1)
 
 alphas = [0, 20, 200]

@@ -19,7 +19,7 @@ reg.fit(X_train,y_train)
 print(reg.coef_)
 print(reg.intercept_)
 
-alphas = [0,1,5,10,30]
+alphas = [0,1,5,10,30] # lambda
 plt.figure(figsize=(12,6))
 plt.scatter(X,y)
 for i in alphas:

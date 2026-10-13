@@ -6,10 +6,10 @@ X,y = load_diabetes(return_X_y=True)
 
 from sklearn.model_selection import train_test_split
 
-X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.2,random_state=4)
+X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.2,random_state=4) 
 
 from sklearn.linear_model import SGDRegressor
-reg = SGDRegressor(penalty='l2',max_iter=500,eta0=0.1,learning_rate='constant',alpha=0.001)
+reg = SGDRegressor(penalty='l2',max_iter=500,eta0=0.1,learning_rate='constant',alpha=0.001) # alpha = lambda
 
 reg.fit(X_train,y_train)
 
@@ -48,8 +48,8 @@ class MeraRidgeGD:
         X_train = np.insert(X_train,0,1,axis=1)
         
         for i in range(self.epochs):
-            thetha_der = np.dot(X_train.T,X_train).dot(thetha) - np.dot(X_train.T,y_train) + self.alpha*thetha
-            thetha = thetha - self.learning_rate*thetha_der
+            thetha_der = np.dot(X_train.T,X_train).dot(thetha) - np.dot(X_train.T,y_train) + self.alpha*thetha # thetha_der = X^T * X * thetha - X^T * y
+            thetha = thetha - self.learning_rate*thetha_der # thetha = thetha - lr * thetha_der
         
         self.coef_ = thetha[1:]
         self.intercept_ = thetha[0]

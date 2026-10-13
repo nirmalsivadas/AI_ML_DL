@@ -2,7 +2,7 @@ from sklearn.datasets import make_regression
 import matplotlib.pyplot as plt
 import numpy as np
 
-X,y = make_regression(n_samples=100, n_features=1, n_informative=1, n_targets=1,noise=20,random_state=13)
+X,y = make_regression(n_samples=100, n_features=1, n_informative=1, n_targets=1,noise=20,random_state=13) # sample data
 
 plt.scatter(X,y)
 plt.show()
@@ -50,7 +50,7 @@ def linear_regression(X,y,alpha=1):
 
 class MeraRidge:
     
-    def __init__(self,alpha=0.1):
+    def __init__(self,alpha=0.1): # alpha is lambda
         self.alpha = alpha
         self.m = None
         self.b = None
@@ -61,8 +61,8 @@ class MeraRidge:
         den = 0
         
         for i in range(X_train.shape[0]):
-            num = num + (y_train[i] - y_train.mean())*(X_train[i] - X_train.mean())
-            den = den + (X_train[i] - X_train.mean())*(X_train[i] - X_train.mean())
+            num = num + (y_train[i] - y_train.mean())*(X_train[i] - X_train.mean()) # this is the numerator, sum(y-y_mean)*(x-x_mean)
+            den = den + (X_train[i] - X_train.mean())*(X_train[i] - X_train.mean()) # this is the denominator, sum(x-x_mean)
         
         self.m = num/(den + self.alpha)
         self.b = y_train.mean() - (self.m*X_train.mean())

@@ -158,7 +158,7 @@ print(reg.coef_)
 print(reg.intercept_)
 
 def cal_loss(m,alpha):
-    return np.sum((y - m*X.ravel() + 2.29)**2) + alpha*abs(m)
+    return np.sum((y - m*X.ravel() + 2.29)**2) + alpha*abs(m) # alpha is lambda
 
 def predict(m):
     return m*X - 2.29
