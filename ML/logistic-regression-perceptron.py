@@ -3,7 +3,7 @@ import os
 from sklearn.datasets import make_classification
 import numpy as np
 X, y = make_classification(n_samples=100, n_features=2, n_informative=1,n_redundant=0,
-                           n_classes=2, n_clusters_per_class=1, random_state=41,hypercube=False,class_sep=10)
+                           n_classes=2, n_clusters_per_class=1, random_state=41,hypercube=False,class_sep=10) # sample data
 
 import matplotlib
 matplotlib.use('Agg')
@@ -13,18 +13,18 @@ plt.figure(figsize=(10,6))
 plt.scatter(X[:,0],X[:,1],c=y,cmap='winter',s=100)
 plt.tight_layout()
 plt.savefig(os.path.join(os.getcwd(), 'logistic_data_scatter.png'))
-plt.close()
+plt.close() # 2d dataset
 
 def perceptron(X,y):
     
-    X = np.insert(X,0,1,axis=1)
-    weights = np.ones(X.shape[1])
+    X = np.insert(X,0,1,axis=1) # adding a column of 1s in front for bias
+    weights = np.ones(X.shape[1]) # initializing weights as 1 for each feature)
     lr = 0.1
     
     for i in range(1000):
-        j = np.random.randint(0,100)
-        y_hat = step(np.dot(X[j],weights))
-        weights = weights + lr*(y[j]-y_hat)*X[j]
+        j = np.random.randint(0,100) # random index from 0 to 99
+        y_hat = step(np.dot(X[j],weights)) # dot product
+        weights = weights + lr*(y[j]-y_hat)*X[j] # updating weights (wnew = wold + lr*(y-yhat)*x)
         
     return weights[0],weights[1:]
 
@@ -35,8 +35,8 @@ intercept_,coef_ = perceptron(X,y)
 print(coef_)
 print(intercept_)
 
-m = -(coef_[0]/coef_[1])
-b = -(intercept_/coef_[1])
+m = -(coef_[0]/coef_[1]) # m = -(w0/w1)
+b = -(intercept_/coef_[1]) # b = -(w0/w1)
 
 x_input = np.linspace(-3,3,100)
 y_input = m*x_input + b
