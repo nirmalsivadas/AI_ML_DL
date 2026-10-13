@@ -3,7 +3,7 @@ import os
 from sklearn.datasets import make_classification
 import numpy as np
 X, y = make_classification(n_samples=100, n_features=2, n_informative=1,n_redundant=0,
-                           n_classes=2, n_clusters_per_class=1, random_state=41,hypercube=False,class_sep=20)
+                           n_classes=2, n_clusters_per_class=1, random_state=41,hypercube=False,class_sep=20) # sample data
 
 import matplotlib
 matplotlib.use('Agg')
@@ -16,13 +16,13 @@ plt.savefig(os.path.join(os.getcwd(), 'logistic_gradient_data.png'))
 plt.close()
 
 from sklearn.linear_model import LogisticRegression
-lor = LogisticRegression(penalty=None, solver='lbfgs')
+lor = LogisticRegression(penalty=None, solver='lbfgs') # penalty is l1 or l2 and solver is lbfgs, lbfgs is basically gradient descent
 lor.fit(X,y)
 print(lor.coef_)
 print(lor.intercept_)
 
-m1 = -(lor.coef_[0][0]/lor.coef_[0][1])
-b1 = -(lor.intercept_/lor.coef_[0][1])
+m1 = -(lor.coef_[0][0]/lor.coef_[0][1]) 
+b1 = -(lor.intercept_/lor.coef_[0][1]) 
 
 x_input = np.linspace(-3,3,100)
 y_input = m1*x_input + b1
@@ -34,8 +34,8 @@ def gd(X,y):
     lr = 0.5
     
     for i in range(5000):
-        y_hat = sigmoid(np.dot(X,weights))
-        weights = weights + lr*(np.dot((y-y_hat),X)/X.shape[0])
+        y_hat = sigmoid(np.dot(X,weights)) # y = dot(x,w)
+        weights = weights + lr*(np.dot((y-y_hat),X)/X.shape[0]) # wnew = wold + lr*(y-yhat)*x/m
         
     return weights[1:],weights[0]
 
