@@ -80,7 +80,7 @@ def perceptron(X,y):
     return weights[0],weights[1:]
 
 def sigmoid(z):
-    return 1/(1 + np.exp(-z))
+    return 1/(1 + np.exp(-z)) # sigmoid function (sigma(z) = 1/(1+e^-z))
 
 intercept_,coef_ = perceptron(X,y)
 
