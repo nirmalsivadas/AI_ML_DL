@@ -50,7 +50,7 @@ y_pred1 = clf1.predict(X_test_scaled)
 y_pred2 = clf2.predict(X_test)
 
 print("Accuracy of Logistic Regression (Scaled):", accuracy_score(y_test, y_pred1))
-print("Accuracy of Decision Trees:", accuracy_score(y_test, y_pred2))
+print("Accuracy of Decision Trees:", accuracy_score(y_test, y_pred2)) # accuracy score
 
 import numpy as np
 import pandas as pd
@@ -60,7 +60,7 @@ from sklearn.metrics import recall_score, precision_score, f1_score, confusion_m
 classes = sorted(list(y_test.unique()))
 
 print("Logistic Regression Confusion Matrix\n")
-cm1 = confusion_matrix(y_test, y_pred1, labels=classes)
+cm1 = confusion_matrix(y_test, y_pred1, labels=classes) # confusion matrix
 display(pd.DataFrame(cm1, index=classes, columns=classes))
 
 print("\nDecision Tree Confusion Matrix\n")
@@ -75,9 +75,9 @@ display(result.sample(10))
 
 print("\nFor Logistic Regression Model")
 print("-"*50)
-print("Precision (per class):", precision_score(y_test, y_pred1, average=None, zero_division=0))
-print("Recall (per class):", recall_score(y_test, y_pred1, average=None, zero_division=0))
-print("F1 score (per class):", f1_score(y_test, y_pred1, average=None, zero_division=0))
+print("Precision (per class):", precision_score(y_test, y_pred1, average=None, zero_division=0)) # precision
+print("Recall (per class):", recall_score(y_test, y_pred1, average=None, zero_division=0)) # recall
+print("F1 score (per class):", f1_score(y_test, y_pred1, average=None, zero_division=0)) # f1
 print("Macro F1 Score:", f1_score(y_test, y_pred1, average='macro', zero_division=0))
 
 print("\nFor DT Model")
